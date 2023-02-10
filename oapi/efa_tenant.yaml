@@ -1,0 +1,56 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Sample API
+  description: A sample API to illustrate OpenAPI concepts
+
+# components:
+#  securitySchemes:
+#    BasicAuth:
+#      type: http
+#      scheme: basic
+# security:
+#   - BasicAuth: []
+paths:
+  /:
+    get:
+      description: Get a list of Tenants
+      operationId: api.index
+      responses:
+        '200':
+          description: Successful response
+          content: 
+            text/html:
+              schema:
+                type: string
+  
+  /create_tenant:
+    get:
+      description: Create EFA Tenant Request Form
+      operationId: api.create_tenant
+      responses:
+        '200':
+          description: Successful response
+          content: 
+            text/html:
+              schema:
+                type: string
+                
+
+  
+  /get_tenant:
+    get:
+      description: Get a Tenant
+      operationId: api.get_tenant
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  message:
+                    type: string
