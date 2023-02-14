@@ -19,15 +19,52 @@ paths:
       responses:
         '200':
           description: Successful response
-          content: 
-            text/html:
+          content:
+            application/json:
               schema:
-                type: string
+                type: array
+              items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                description:
+                  type: string
+                num_of_vrf:
+                    type: integer
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  message:
+                    type: string
   
   /create_tenant:
-    get:
-      description: Create EFA Tenant Request Form
+    post:
+      description: Lets a user create a new Tenant.
       operationId: api.create_tenant
+      requestBody:
+        required: true
+      content:
+        application/json:
+        schema:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            description:
+              type: string
+            num_of_vrf:
+                type: integer
+
+
       responses:
         '200':
           description: Successful response
@@ -35,10 +72,20 @@ paths:
             text/html:
               schema:
                 type: string
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  
                 
 
   
-  /get_tenant:
+  /tenants:
     get:
       description: Get a Tenant
       operationId: api.get_tenant
@@ -54,3 +101,40 @@ paths:
                 properties:   
                   message:
                     type: string
+
+
+  /tenants/{name}:
+  get:
+    description: Get a specific Tenant by it's name.
+    parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+    '200':
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            description:
+              type: string
+            num_of_vrf:
+                type: integer
+    '400':
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            type: object 
+            properties:           
+              message:
+                type: string
+
