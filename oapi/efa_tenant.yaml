@@ -23,118 +23,95 @@ paths:
             application/json:
               schema:
                 type: array
-              items:
-              type: object
-              properties:
-                id:
-                  type: integer
-                name:
-                  type: string
-                description:
-                  type: string
-                num_of_vrf:
-                    type: integer
+                items:
+                  $ref: '#/components/schemas/Tenant'
+
+        
         '400':
-          description: Invalid request
+          $ref: '#/components/responses/400Error'
+  
+  /tenants:
+    get:
+      description: Get a list of Tenants
+      operationId: api.get_tenant
+      responses:
+        '200':
+          description: Successful response
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  message:
-                    type: string
-  
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tenant'
+
+        '400':
+          $ref: '#/components/responses/400Error'
+
+
   /create_tenant:
     post:
       description: Lets a user create a new Tenant.
       operationId: api.create_tenant
       requestBody:
         required: true
-      content:
-        application/json:
-        schema:
-          type: object
-          properties:
-            id:
-              type: integer
-            name:
-              type: string
-            description:
-              type: string
-            num_of_vrf:
-                type: integer
-
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tenant'
 
       responses:
         '200':
-          description: Successful response
-          content: 
-            text/html:
-              schema:
-                type: string
+          description: Successfully created a new Tenant
         '400':
-          description: Invalid request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-  
-                
+          $ref: '#/components/responses/400Error'
 
-  
-  /tenants:
-    get:
-      description: Get a Tenant
-      operationId: api.get_tenant
-      responses:
-        '200':
-          description: Successful response
-        '400':
-          description: Invalid request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:   
-                  message:
-                    type: string
+
 
 
   /tenants/{name}:
-  get:
-    description: Get a specific Tenant by it's name.
-    parameters:
-      - name: name
-        in: path
-        required: true
-        schema:
-          type: string
-    responses:
-    '200':
-      description: Successful response
-      content:
-        application/json:
+    get:
+      description: Get a specific Tenant by it's name.
+      operationId: api.get_tenants
+      parameters:
+        - name: name
+          in: path
+          required: true
           schema:
-            type: object
-          properties:
-            id:
-              type: integer
-            name:
-              type: string
-            description:
-              type: string
-            num_of_vrf:
-                type: integer
-    '400':
+            type: string
+
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tenant'
+        '400':
+          $ref: '#/components/responses/400Error'
+
+
+components:
+  schemas:
+    Tenant:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        num_of_vrf:
+            type: integer
+
+
+  responses:
+    400Error:
       description: Invalid request
       content:
         application/json:
           schema:
             type: object 
-            properties:           
+            properties:
               message:
                 type: string
-
