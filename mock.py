@@ -36,12 +36,4 @@ def get_tenant_by_name(name):
         return Response(response=response_400, status=400)
 
 
-def create_tenant(tenant_name):
-    response_201 = f'Successfully created {tenant_name}.' 
-    return Response(response=response_201, status=201)
-
-
-def pydantic_error_response():
-    response_400 = 'Field_Name is not valid.'
-    return Response(response=response_400, status=400)
 
