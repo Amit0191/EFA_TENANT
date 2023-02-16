@@ -1,6 +1,6 @@
 from connexion import NoContent
 from mock import get_all_tenants, get_tenant_by_name
-from validations import validate, validate_all
+from validations import validate, validate_all, validate_create
 
 
 def index():
@@ -9,11 +9,13 @@ def index():
 
 
 def create_tenant(tenant):
-    # id = tenant.get('id')
-    return 'Successfully added Tenant', 201
+
+    val = validate_create(tenant)
+    return val
 
 
 def get_tenants():
+    
     response = get_all_tenants()
     val = validate_all(response)
     return val
