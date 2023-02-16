@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import List
 
 
 class GetRequest(BaseModel):
@@ -13,4 +14,6 @@ class EFABody(BaseModel):
     num_of_vrf: int
 
 
+class EFAList(BaseModel):
+    __root__: List[EFABody]
 
