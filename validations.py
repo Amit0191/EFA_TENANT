@@ -14,5 +14,3 @@ def validate(response):
             return json.loads(e.json())
     else:
         return response.response[0].decode('UTF-8')
-
-
