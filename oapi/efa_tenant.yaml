@@ -18,7 +18,7 @@ paths:
       operationId: api.index
       responses:
         '200':
-          description: Successful response
+          description: Tenant List for you, sire.
           content:
             application/json:
               schema:
@@ -36,7 +36,7 @@ paths:
       operationId: api.get_tenant
       responses:
         '200':
-          description: Successful response
+          description: Tenant List for you, sire.
           content:
             application/json:
               schema:
