@@ -24,3 +24,13 @@ def validate_all(response):
             return json.loads(e.json())
     else:
         return response.response[0].decode('UTF-8')
+    
+
+def validate_create(request):
+
+    try:
+        efa_body = EFABody(**request)
+        return f'Scuccesfully created Tenant with Tenant name {efa_body.name}'
+    except ValidationError as e:
+        return json.loads(e.json())
+
