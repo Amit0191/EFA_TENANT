@@ -56,11 +56,12 @@ def validate_all(response) -> List:
         return response.response[0].decode('UTF-8')
     
 
-def validate_create(request) -> str:
+def validate_create(request, num: int) -> str:
 
     try:
         efa_body = EFABody(**request)
-        return f'Scuccesfully created Tenant with Tenant name {efa_body.name}'
+        efa_body.num_of_vrf = efa_body.num_of_vrf - num
+        return f'Scuccesfully created Tenant with Tenant name {efa_body.name}, {efa_body.num_of_vrf}'
     except ValidationError as e:
         return json.loads(e.json())
 
