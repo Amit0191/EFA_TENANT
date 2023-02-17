@@ -44,7 +44,7 @@ def get_tenant_by_name(name: str):
                     name (str): Tenant name to be fetched.
 
             Returns:
-                    (Response): A mock response containing Tenant with name specified in the parameter of 400.
+                    (Response): A mock response containing Tenant with name specified.
     '''
     
     tenant = next((item for item in TENANTS if item["name"] == name), None)
