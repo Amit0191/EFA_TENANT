@@ -4,13 +4,10 @@ info:
   title: Sample API
   description: A sample API to illustrate OpenAPI concepts
 
-# components:
-#  securitySchemes:
-#    BasicAuth:
-#      type: http
-#      scheme: basic
-# security:
-#   - BasicAuth: []
+security:
+  - BasicAuth: []
+
+
 paths:
   /:
     get:
@@ -121,3 +118,9 @@ components:
               message:
                 type: string
 
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      x-basicInfoFunc: app.basic_auth
+  
