@@ -1,7 +1,7 @@
 '''
     A module specified by connexion to implement endpoints according to OpenApi3 specs. 
         Functions:
-            create_tenant():
+            create_tenant(tenant):
                 Deals with the endpoint /create_tenant. Takes as an argument Tenant dictionary and returns a successful response if Tenant is created.
                     Parameters:
                             tenant (Dict): Dict of Tenant fields like name, num_of_vrf, description, etc.
@@ -12,7 +12,7 @@
             get_tenants():
                 Deals with the endpoint /tenants. Returns a list of all Tenants available.
                     Parameters:
-                            tenant (Dict): Dict of Tenant fields like name, num_of_vrf, description, etc.
+                            None
 
                     Returns:
                             (Response): A successful response if tenant is created successfully.
@@ -40,8 +40,8 @@ def index() -> str:
 
 def create_tenant(tenant: dict) -> str:
 
-    add_vrf = add_vrf(tenant, 50)
-    val = validate_create(tenant)
+    tenant = add_vrf(tenant, 50)
+    val = validate_create(tenant, 40)
     return val
 
 
@@ -49,7 +49,6 @@ def get_tenants() -> List:
     
     response = get_all_tenants()
     val = validate_all(response)
-    print(type(val))
     return val
 
 
@@ -57,5 +56,4 @@ def get_tenant(name: str) -> Dict:
     
     response = get_tenant_by_name(name)
     val = validate(response)
-    print(type(val))
     return val
