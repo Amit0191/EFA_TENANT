@@ -33,7 +33,7 @@ paths:
   /tenants:
     get:
       description: Get a list of Tenants
-      operationId: api.get_tenant
+      operationId: api.get_tenants
       responses:
         '200':
           description: Tenant List for you, sire.
@@ -53,6 +53,7 @@ paths:
       description: Lets a user create a new Tenant.
       operationId: api.create_tenant
       requestBody:
+        x-body-name: 'tenant'
         required: true
         content:
           application/json:
@@ -61,17 +62,21 @@ paths:
 
       responses:
         '200':
+          description: Successfully updated Tenant
+        
+        '201':
           description: Successfully created a new Tenant
+        
         '400':
           $ref: '#/components/responses/400Error'
 
 
 
 
-  /tenants/{name}:
+  /tenant/{name}:
     get:
       description: Get a specific Tenant by it's name.
-      operationId: api.get_tenants
+      operationId: api.get_tenant
       parameters:
         - name: name
           in: path
@@ -115,3 +120,4 @@ components:
             properties:
               message:
                 type: string
+
