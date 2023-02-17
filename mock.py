@@ -24,10 +24,29 @@ TENANTS= [{
 
 
 def get_all_tenants():
+    '''
+    Returns a mock response containing a list of Tenants.
+
+            Parameters:
+                    None
+
+            Returns:
+                    (Response): A mock response containing all the Tenants available to us.
+    '''
     return Response(response=TENANTS, status=200, mimetype='application/json')
 
 
-def get_tenant_by_name(name):
+def get_tenant_by_name(name: str):    
+    '''
+    Returns a mock response with a Tenant Name defined in the parameter name. If name doesn't match, returns 400 Response.
+
+            Parameters:
+                    name (str): Tenant name to be fetched.
+
+            Returns:
+                    (Response): A mock response containing Tenant with name specified in the parameter of 400.
+    '''
+    
     tenant = next((item for item in TENANTS if item["name"] == name), None)
     if tenant != None:
         return Response(response=tenant, status=201, mimetype= 'application/json')
