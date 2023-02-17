@@ -1,10 +1,40 @@
+'''
+    A module to validate Mock responses by using Pydantic library. 
+        Functions:
+            validate(Response):
+                Validates Responses based on Pydantic class EFABody. 
+                    Parameters:
+                            response (Response): Takes in Mock Response as parameter.
+
+                    Returns:
+                            (Response): If validated successfuly, a json response is returned containing a Tenant.
+
+            validate_all():
+                Validates Responses(List of Tenants) based on Pydantic class EFAList. 
+                    Parameters:
+                            tenant (Dict): Dict of Tenant fields like name, num_of_vrf, description, etc.
+
+                    Returns:
+                            (Response): If validated successfuly, a json response is returned containing all tenants.
+
+            validate_create(name):
+                Accepts a request and validates it against EFABody.
+                    Parameters:
+                            request (Request): String reflecting Tenant Name to be returned.
+
+                    Returns:
+                            (Response): Response tenant created successfully is returned if succeded.
+'''
+
+
 from pydantic import ValidationError
+from typing import List, Dict
 import json
 
 from pydantic_classes import EFABody, EFAList
 
 
-def validate(response):
+def validate(response) -> Dict:
     if response.status_code == 201:
         try:
             efa_body = EFABody(**response.response)
@@ -15,7 +45,7 @@ def validate(response):
         return response.response[0].decode('UTF-8')
 
 
-def validate_all(response):
+def validate_all(response) -> List:
     if response.status_code == 200:
         try:
             efa_list = EFAList(__root__= response.response)
@@ -26,7 +56,7 @@ def validate_all(response):
         return response.response[0].decode('UTF-8')
     
 
-def validate_create(request):
+def validate_create(request) -> str:
 
     try:
         efa_body = EFABody(**request)
